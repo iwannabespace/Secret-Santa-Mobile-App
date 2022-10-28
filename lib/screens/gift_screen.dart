@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project/screens/HomePage.dart';
 
 class GiftScreen extends StatefulWidget {
   const GiftScreen({Key? key}) : super(key: key);
@@ -18,12 +17,7 @@ class _GiftScreenState extends State<GiftScreen> {
         children: [
           InkWell(
             onTap: () {
-              Navigator.pop(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HomePage(),
-                ),
-              );
+              Navigator.of(context).pop();
             },
             child: Container(
               child: Center(child: Icon(Icons.arrow_back)),

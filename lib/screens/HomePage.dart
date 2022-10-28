@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:project/components/bottom_card_view.dart';
 import 'package:project/screens/gift_screen.dart';
-import 'package:project/classes/card.dart';
+import '../classes/Cards.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
   @override
   Widget build(BuildContext context) {
+    List<CardsItem> cards = [
+      CardsItem(title: "Alperen", subTitle: "HOOOG RİDER",color: Colors.deepOrange),
+      CardsItem(title: "Nahit", subTitle: "HOOOG RİDER",color: Colors.red),
+      CardsItem(title: "Ertuch", subTitle: "HOOOG RİDER",color: Colors.blue),
+      CardsItem(title: "Yunus", subTitle: "HOOOG RİDER",color: Colors.amber),
+      CardsItem(title: "Edirne", subTitle: "KEŞAN ",color: Colors.indigo),
+    ];
    return Column(
      children: [
        Expanded(
@@ -38,29 +46,25 @@ class HomePage extends StatelessWidget {
                              Padding(
                                padding: const EdgeInsets.only(left: 25.0),
                                child: CircleAvatar(
-                                 // child: Image.asset("alperen.jpg"),
-                                 backgroundColor: Colors.pink,
+                                 backgroundImage: AssetImage("alperen.jpg"),
                                ),
                              ),
                              Padding(
                                padding: const EdgeInsets.only(left: 50.0),
                                child: CircleAvatar(
-                                 // child: Image.asset("alperen.jpg"),
-                                 backgroundColor: Colors.cyan,
+                                 backgroundImage: AssetImage("ertuch.jpg"),
                                ),
                              ),
                              Padding(
                                padding: const EdgeInsets.only(left: 75.0),
                                child: CircleAvatar(
-                                 // child: Image.asset("nahit.jpg"),
-                                 backgroundColor: Colors.red,
+                                 backgroundImage: AssetImage("nahit.jpg"),
                                ),
                              ),
                              Padding(
                                padding: const EdgeInsets.only(left: 100.0),
                                child: CircleAvatar(
-                                 // child: Image.asset("yunus.png"),
-                                 backgroundColor: Colors.yellow,
+                                 backgroundImage: AssetImage("yunus.png"),
                                ),
                              ),
                            ],
@@ -122,15 +126,13 @@ class HomePage extends StatelessWidget {
                              ),
                              child: Row(
                                children: [
-                                 Center(child: Padding(
-                                   padding: const EdgeInsets.only(left: 8.0),
-                                   child: Text("All Cards",style: TextStyle(fontWeight: FontWeight.bold),),
-                                 )),
-                                 Spacer(),
-                                 Padding(
-                                   padding: const EdgeInsets.only(right: 18.0),
+                                 Expanded(
+                                   flex: 68,
+                                   child: Center(child: Text("All Cards",style: TextStyle(fontWeight: FontWeight.bold),)),
+                                 ),
+                                 Expanded(
+                                   flex: 22,
                                    child: Container(
-                                     height: 30,
                                        child: Center(child: Text("17",style: TextStyle(color: Colors.white,fontSize: 8,fontWeight: FontWeight.bold),)),
                                        decoration: ShapeDecoration(
                                            shape: CircleBorder(
@@ -142,7 +144,8 @@ class HomePage extends StatelessWidget {
                                            color: Colors.black,
                                        ),
                                    ),
-                                 )
+                                 ),
+                                 Expanded(flex:10,child: SizedBox())
                                ],
                              ),
                            ),
@@ -184,33 +187,15 @@ class HomePage extends StatelessWidget {
        ),
        Expanded(
          flex: 104,
-         child: Container(
-           color: Colors.white,
-           child: ListView(
-             padding: EdgeInsets.symmetric(horizontal: 48),
-             children: [
-               CardField(
-                 member: "Alperen",
-                 cardName: "Selamlar",
-               ),
-               CardField(
-                 member: "Nahit",
-                 cardName: "Selamlar",
-               ),
-               CardField(
-                 member: "Ertuch",
-                 cardName: "Selamlar",
-               ),
-               CardField(
-                 member: "Yunus",
-                 cardName: "Selamlar",
-               ),
-               CardField(
-                 member: "HOOOOG RİDERR",
-                 cardName: "Selamlar",
-               ),
-             ],
-           ),
+         child: GridView.builder(
+           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: Checkbox.width,crossAxisSpacing: Checkbox.width,),
+           itemCount: cards.length,
+           shrinkWrap: true,
+           itemBuilder:(context, index) {
+             return BottomCardView(cu: cards[index],);
+           },
+           physics: BouncingScrollPhysics(),
+           padding: EdgeInsets.all(30),
          ),
        ),
      ],
